@@ -1,0 +1,115 @@
+﻿<head>
+    <style>
+        .header_color {
+            background-color: #BF9D40;
+            color: white;
+            font-weight: 900;
+        }
+    </style>
+    <script src="~/js/jquery/jquery-3.2.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="~/js/API/ApiCalls.js"></script>
+    <script src="~/js/API/Alerts.js"></script>
+
+</head>
+<div class="main-panel">
+    <div class="content">
+        <div class="row card card-outline-warning">
+            <div class="card-header card-title header_color text-white">
+                ADD PANELS
+            </div>
+            <div class="col-12 grid-margin stretch-card">
+                <div class="card-body">
+                    @*<h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text"></p>*@
+                    <div class="row">
+
+                        <div class="col-md-4 col-lg-4">
+                            <form id="Vform">
+                                <div class="">
+                                    <input id="Id" hidden />
+                                    <div class="form-group ">
+
+                                        <label for="">Panel Code</label>
+                                        <input type="text" class="form-control form-control-sm" id="Panel_Code" placeholder="Panel Code">
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="">Panel Name</label>
+                                        <input type="text" class="form-control form-control-sm" id="Panel_Name" placeholder="Panel Name">
+                                    </div>
+                                </div>
+                            </form>
+                                <div class="d-flex flex-row justify-content-center small">
+                                    <div class="input-group-append ml-1">
+                                        <button class="btn btn-sm header_color " onclick="SubmitValidatoin(this)" type="button" id="Save">Save</button>
+                                    </div>
+                                    <div class="input-group-append ml-2">
+                                        <button class="btn btn-sm  header_color" type="button" onclick="DeleteValidatoin(this)" id="Delete">Delete</button>
+                                    </div>
+                                    <div class="input-group-append ml-2">
+                                        <button class="btn btn-sm header_color" type="reset" onclick="RefereshForm()" id="Ref">Refresh</button>
+                                    </div>
+                                    <div class="input-group-append ml-2">
+                                        <button class="btn btn-sm header_color " onclick="exit()" type="button">Exit</button>
+                                    </div>
+                                </div>
+
+
+
+                        
+                        </div>
+                        <div class="col-md-8 col-lg-8">
+                            <div class="ml-auto">
+                                <div class="">
+                                    <div class="row card card-outline-warning">
+                                        <div class="card-header card-title header_color text-white">
+                                            PANELS List
+                                        </div>
+                                        @*<div class="col-12 grid-margin stretch-card">*@
+                                        <div class="card-body">
+                                            <div class="" id="P_List" style="overflow-y:auto ; overflow-x: hidden; width: auto; height: 327px;">
+
+                                            </div>
+                                        </div>
+                                        @*</div>*@
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <table>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- content-wrapper ends -->
+    <!-- partial:../../partials/_footer.html -->
+    @Html.Partial("footer")
+    <!-- partial -->
+</div>
+
+<script src="~/js/LabanJs/Panel.js"></script>
+<script>
+
+
+
+    window.onload = function () {
+        LoadPanelList("xyz");
+    };
+
+    function LoadPanelList(btn) {
+        document.getElementById('P_List').innerHTML = 'wait';
+     
+        LoadDataBeforeModal('GET', 'PanelList', 'example1', 'P_List', 'modal-defaul', btn, 'loadingModal')
+    }
+
+    function exit() {
+        document.location.href = "/Account/Login";
+    }
+
+
+</script>

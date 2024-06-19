@@ -1,0 +1,8 @@
+﻿body {
+}
+@media (max-width: 768px) {
+    .yvideo {
+        width: 400px;
+        height: 200px;
+    }
+}

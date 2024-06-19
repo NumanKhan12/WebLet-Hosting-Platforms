@@ -1,0 +1,47 @@
+﻿@model WEBLET.ViewModels.ModalViewMoal
+<div class="modal  fade" id="modal-default" >
+    <div class="modal-dialog    modal-lg" style="width:@(Model.ModelSize==null?"50%":Model.ModelSize) !important">
+        <div class="modal-content card">
+            <div class="modal-header">
+                <h4 class="modal-title">@Model.Name</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <div >
+                                    <div class="card">
+                                        <div class="card-body" id="ptable">
+                                            <table id="example1" class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        @foreach (var item in Model.Columns)
+                                                        {
+                                                            <td>@item</td>
+                                                        }
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="@Model.tableId"></tbody>
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

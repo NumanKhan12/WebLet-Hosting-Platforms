@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewData["Title"] = "UserRegistrationView";
+    Layout = null;
+}
+
+
+<head>
+    <style>
+        .header_color {
+            background-color: #BF9D40;
+            color: white;
+            font-weight: 900;
+        }
+         .child {
+            background-color: #f0d27f
+        }
+    </style>
+   
+</head>
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="page-header">
+            <h3 class="page-title"> Labnan Garden </h3>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Forms</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Form elements</li>
+                </ol>
+            </nav>
+        </div>
+
+        <div class="row card card-outline-warning ">
+            <div class="card-header card-title header_color text-white">User Registration</div>
+
+            <div class="col-12 grid-margin stretch-card">
+
+                <div class="card-body">
+
+                    @*<h4 class="card-title">Basic form elements</h4>
+                        <p class="card-description"> Basic form elements </p>*@
+                    <form class="forms-sample">
+                        <div class="row ">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label><b>Name</b></label>
+                                    <input type="text" class="form-control form-control-sm" id="exampleInputUsername1" placeholder="Name">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row ">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label><b>CNIC</b></label>
+                                    <input type="text" class="form-control form-control-sm" id="exampleInputUsername1" placeholder="CNIC">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="form-group ">
+                                    <label><b>Country Code</b></label>
+                                    <select class="form-control  form-control-sm" id="">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label><b>Mobile Number</b></label>
+                                    <input type="email" class="form-control form-control-sm" id="exampleInputEmail1" placeholder="Mobile Number">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row ">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label><b>Email</b></label>
+                                    <input type="text" class="form-control form-control-sm" id="exampleInputUsername1" placeholder="Email">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row ">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label><b>Password</b></label>
+                                    <input type="text" class="form-control form-control-sm" id="exampleInputUsername1" placeholder="Password">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label><b>Confirm Password</b></label>
+                                    <input type="text" class="form-control form-control-sm" id="exampleInputUsername1" placeholder="Confirm Password">
+                                </div>
+                            </div>
+
+                        </div>
+                        <button type="submit" class="btn header_color mr-2">Submit</button>
+                      
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- content-wrapper ends -->
+    <!-- partial:../../partials/_footer.html -->
+    <footer class="footer">
+        <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin templates</a> from Bootstrapdash.com</span>
+        </div>
+    </footer>
+    <!-- partial -->
+</div>

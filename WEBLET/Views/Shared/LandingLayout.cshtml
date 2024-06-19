@@ -1,0 +1,175 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="~/AdminTheme/images/LABANTAB.png" />
+    <title>WEBLETSCRIPT</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
+
+    <link href="~/css/Landing.css" rel="stylesheet" />
+</head>
+<body>
+
+
+    <header>
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light small">
+                <a class="navbar-brand" href="#"><h1><b>WEBLETSCRIPT</b></h1></a>
+                @*<a class="navbar-brand" href="#"> <img src="~/images/Laban.png"></a>*@
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-4 mb-4">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/Dashboard/MemberDashbord">HOME </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/Account/Login">ABOUT</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/Home/ContactView">CONTACT</a>
+                        </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0 ml-auto">
+                        <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
+                        <a href="/Account/Login" class="btn  btn-sm btn-outline-success  bg-warning my-2 my-sm-0 text-dark btn-outline-success btn-warning" type="button">LOGIN</a>
+                        <a href="/Account/UserRegistration" class="btn   btn-sm  ml-2 my-2 my-sm-0  btn-outline-warning text-success" type="button">REGISTRATION</a>
+
+                    </form>
+                    <ul class="navbar-nav d-lg-flex flex-row justify-content-center  mt-2 ">
+                        <!-- <li class="nav-item">
+                        <button class="nav-link btn btn-sm btn-warning" href="#">LOGIN</button>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <button class="nav-link btn btn-sm btn-outline-warning" href="#">REGISTER</button>
+                        </li> -->
+                        <li class="nav-item ">
+                            <!-- Font Icons me h5 lagya ha TUM CSS SY KR LENA-->
+                            <a class="nav-link  ml-1" href="#"><i class="fab fa-facebook-square h5"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link ml-1" href="#"><i class="fab fa-twitter-square h5"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link ml-1" href="#"><i class="fab fa-youtube-square h5"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link ml-1" href="#"><i class="fab fa-google-plus-square h5"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link ml-1" href="#"><i class="fab fa-linkedin h5"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div>
+        @RenderBody()
+
+    </div>
+
+
+
+
+   
+
+    <footer class=" bg-light ">
+        <div class="container ">
+            <div class="row text-center small  ">
+                <div class="col text-dark mt-3">
+                    <h5>Menu</h5>
+
+                    <ul class="navbar-nav   d-lg-flex flex-row justify-content-center   ">
+                        <li class="nav-item active">
+                            <a class="nav-link mr-3 text-dark" href="/Dashboard/MemberDashbord">HOME </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link mr-3 text-dark" href="/Account/Login">ABOUT</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link mr-3 text-dark " href="/Home/ContactView">CONTACT</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="col mt-3">
+                    <h5>Account</h5>
+                    <form class=" ">
+                        <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
+                        <a href="/Account/Login" class="btn  btn-sm btn-outline-success  bg-warning my-2 my-sm-0 text-dark btn-outline-success btn-warning" type="button">LOGIN</a>
+                        <a href="/Account/UserRegistration" class="btn   btn-sm  ml-2 my-2 my-sm-0  btn-outline-warning text-success" type="button">REGISTRATION</a>
+
+                    </form>
+
+                </div>
+            </div>
+            <hr>
+            <div class="row   align-items-center">
+
+                <!-- Grid column -->
+                <div class="col-md-7 col-lg-8">
+
+                    <!--Copyright-->
+                    <p class="text-center text-md-left">
+                        <a href="https://md om/">
+                            <strong> </strong>
+                        </a>
+                    </p>
+
+                </div>
+                <!-- Grid column -->
+                <!-- Grid column -->
+                <div class="col-md-5 col-lg-4 ml-lg-0">
+
+                    <!-- Social buttons -->
+                    <div class="text-center text-md-right">
+                        <ul class="list-unstyled list-inline">
+                            <li class="list-inline-item">
+                                <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                                    <i class="fab fa-google-plus-g"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+        </div>
+
+        <!-- Grid row -->
+    </footer>
+    <!-- Footer -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+</body>
+</html>
+

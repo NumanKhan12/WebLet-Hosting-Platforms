@@ -1,0 +1,49 @@
+﻿@model IEnumerable<WEBLET.Models.PanelDetails>
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using WEBLET.BusinessLogics;
+@{ 
+    var panelList = PanelProcessor.PanelList();
+}
+@*<div class="main-panel w-100">
+    <div class="content-wrapper w-100">*@
+        
+        @*<div class="card mb-3 mt-3 border border-warning w-100">
+            <div class="card-header header_color">
+            Search  Panel's Detail
+            </div>
+            <div class="card-body">*@
+
+                <table id="PanelModelTableId" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Panel Name</th>
+                            <th>Discription</th>
+                            <th>Price </th>
+                            <th>Delevery Days</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        @foreach (var item in Model)
+                        {
+                            <tr onclick="SetPanelValues('@item.ID', '@item.PANEL_ID', '@item.DISCRIPTION','@item.PanelDetailsNumber', '@item.CONDITION', '@item.DELEVERYDAY', '@item.FROM_DATE', '@item.TO_DATE', '@item.PRICE', '@item.SHIPMRNT', '@item.DEMO_LINK', '@item.RETURNS_DIS', '@item.HOST1', '@item.HOST2', '@item.HOST3')" data-dismiss="modal">
+                                <td>@panelList.Where(i => i.ID.ToString() == item.PANEL_ID).Select(i => i.Panel_Name).SingleOrDefault()</td>
+                                <td>@item.DISCRIPTION</td>
+                                <td>@item.PRICE</td>
+                                <td>@item.DELEVERYDAY</td>
+                            </tr>
+
+
+                        }
+                    </tbody>
+
+                </table>
+            @*</div>
+        </div>*@
+    <!--</div>
+</di>-->
+@*v
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@

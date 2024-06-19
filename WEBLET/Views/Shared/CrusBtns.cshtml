@@ -1,0 +1,21 @@
+﻿<div class="input-group-append ml-1">
+    <button class="btn btn-sm header_color  btn-style" onclick="SubmitValidation(this)" type="button" id="Save">Save</button>
+</div>
+<div class="input-group-append ml-2">
+    <button class="btn btn-sm  header_color  btn-style" type="button" onclick="DeleteValidation(this)" id="Delete">Delete</button>
+</div>
+<div class="input-group-append ml-2">
+    <button class="btn btn-sm header_color  btn-style" type="reset" onclick="RefereshForm()" id="Ref">Refresh</button>
+</div>
+<div class="input-group-append ml-2">
+    <button class="btn btn-sm header_color  btn-style" onclick="exit()" type="button">Exit</button>
+</div>
+@*
+    btn-style
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<script>
+    function exit() {
+        document.location.href = "/Account/Login";
+    }
+</script>

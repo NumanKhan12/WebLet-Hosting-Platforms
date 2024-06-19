@@ -1,0 +1,406 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>WEBLETSCRIPT</title>
+    <link rel="shortcut icon" href="~/AdminTheme/images/LABANTAB.png" />
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="~/AdminTheme/vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="~/AdminTheme/vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="~/AdminTheme/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="~/AdminTheme/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="~/AdminTheme/vendors/daterangepicker/daterangepicker.css">
+    @*<link rel="stylesheet" href="~/AdminTheme/vendors/chartist/chartist.min.css">*@
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link rel="stylesheet" href="~/AdminTheme/css/dataTables/dataTables.bootstrap4.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.4.2/css/buttons.dataTables.min.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="~/AdminTheme/css/style.css" />
+    <style>
+
+        .navbar .navbar-menu-wrapper {
+            color: #BF9D40;
+        }
+
+        .head_color {
+            background-color: white; /*background-color: #ecf0f4;*/
+            /*color: black;
+            font-weight: 900;*/
+        }
+
+        .navbar-default .navbar-fnt {
+            color: #FFFFFF;
+        }
+
+        .sidebar .nav .nav-item:not(.nav-category):hover {
+            background-color: #ffde7396;
+        }
+
+
+        @@media (min-width:960px) {
+            .btn-style {
+                width: 90px;
+            }
+
+            .nav-textColor {
+            }
+
+            .btn-style-item {
+                width: 170px
+            }
+        }
+
+        @@media (min-width:375px) {
+            .btn-style {
+            }
+        }
+
+
+        .header_color {
+            background-color: #BF9D40;
+            color: white;
+            font-weight: 900;
+            font-family: Cambria;
+        }
+
+        .heighttext {
+            height: 30px
+        }
+
+        input, .form-control {
+            border-color: black;
+        }
+
+            input, .form-control:focus {
+                border-color: #BF9D40;
+                background-color: #F7F3E6;
+            }
+
+        .content-wrapper {
+            background: white;
+        }
+
+        .sidebar {
+            border-right: 1px solid #80808036;
+            width: 240px;
+        }
+
+        body {
+            font-family: Cambria;
+        }
+
+        .navbar.fixed-top + .page-body-wrapper {
+            padding-top: 55px;
+        }
+
+        .navbar .navbar-brand {
+            width: 320px;
+        }
+
+        .navbar .navbar-brand-wrapper .navbar-brand img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .navbar .navbar-brand-wrapper .navbar-brand.brand-logo-mini img {
+            width: 40px;
+            height: 40px;
+        }
+
+        @@media (max-width: 480px) {
+            .navbar .navbar-brand-wrapper {
+                width: 70px;
+            }
+        }
+
+        .navbar .navbar-brand-wrapper .navbar-brand {
+            color: #BF9D40;
+        }
+
+            .navbar .navbar-brand-wrapper .navbar-brand :hover {
+            }
+
+        .sidebar .nav .nav-item.nav-profile {
+            margin-top: 20px;
+            width: 0px;
+        }
+
+        .form-control, .select2-container--default .select2-selection--single, .select2-container--default .select2-selection--single .select2-search__field, .typeahead, .tt-query, .tt-hint {
+            border: 1px solid #343a4042;
+        }
+
+            select.form-control, .select2-container--default select.select2-selection--single, .select2-container--default .select2-selection--single select.select2-search__field, select.typeahead, select.tt-query, select.tt-hint {
+                outline: 1px solid #343a4042;
+                color: #1b1a1a;
+            }
+
+        .logo-hover:hover {
+            color: #BF9D40 !important;
+        }
+    </style>
+
+</head>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ApplicationUser user = new ApplicationUser();
+    string userId="";
+if (SignInManager.IsSignedIn(User))
+    {
+         userId = UserManager.GetUserId(User);
+        user = await UserManager.GetUserAsync(User);
+    }
+
+
+
+}
+@using WEBLET.Data;
+@using WEBLET.Models;
+@using WEBLET.BusinessLogics;
+<body>
+    <div class="container-scroller ">
+        <!-- partial:partials/_navbar.html -->
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <nav class="navbar  default-layout-navbar col-lg-12 col-12 p-0  d-flex flex-row">
+
+                <div class="navbar-menu-wrapper d-flex align-items-center flex-grow-1">
+
+                    <div class="navbar-brand-wrapper  d-flex align-items-center" style=" background-color:white !important;   ">
+                        <a class="navbar-brand brand-logo head_color logo-hover" href="#">
+                            <div class="row pr-0">
+                                <div class=" col">
+                                    @*<img src="~/AdminTheme/images/LABANTAB.png" alt="logo" class="logo-dark" />*@
+                                </div>
+                                <div class="col " style="margin-top:18px;">
+                                    <a href="/Home/LandingPage" style=" text-decoration: none;"> <h3 class="mb-sm-5 font-weight-medium d-none d-lg-flex  " style="color:#BF9D40;"><b>WEBLETSCRIPT</b></h3></a>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="navbar-brand brand-logo-mini" href="#"><img src="~/AdminTheme/images/LABANTAB.png" alt="logo" /></a>
+                    </div>
+
+                    <ul class="navbar-nav navbar-nav-right ml-auto">
+                        <div class="icon-container">
+                            <i class="icon-bubbles icon-md" onclick=" window.location.href='#'"></i>
+
+                            <div class="dot-indicator bg-danger"></div>
+                        </div>
+
+                        <li class="nav-item dropdown d-none d-xl-inline-flex user-dropdown">
+                            <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                                @if (await UserManager.IsInRoleAsync(user, "Admin"))
+                                {
+                                    <img class="img-xs rounded-circle ml-2" src="~/AdminTheme/images/faces/face8.jpg" alt="Profile image"> <span class="font-weight-normal"> @user.Name </span>
+                                }
+                                else
+
+                                {
+                                    if (MemberProcessor.GetMember(userId) != null)
+                                    {
+                                        Member member = MemberProcessor.GetMember(userId);
+                                        if (member.MEMBER_PIC == null)
+                                        {
+                                            <img class="img-md rounded-circle" src="~/images/NoImage.jpg" alt="Profile image" width="40" height="40"><span class="font-weight-normal"> @user.Name </span>
+
+                                        }
+                                        else
+                                        {
+                                            <img class="img-md rounded-circle" src="~/images/@member.MEMBER_PIC" width="40" height="40" alt="Profile image"><span class="font-weight-normal"> @user.Name </span>
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <img style="width:40px" class="img-xs rounded-circle ml-2" src="~/images/NoImage.jpg" width="40" height="40" alt="Profile image"> <span class="font-weight-normal"> @user.Name </span>
+                                    }
+                                }
+
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+                                <div class="dropdown-header text-center">
+                                    @if (await UserManager.IsInRoleAsync(user, "Admin"))
+                                    {
+                                        <img class="img-xs rounded-circle ml-2" src="~/AdminTheme/images/faces/face8.jpg" alt="Profile image"> <span class="font-weight-normal"> @user.Name </span>
+
+
+                                    }
+                                    else
+                                    {
+                                        if (MemberProcessor.GetMember(userId) != null)
+                                        {
+                                            Member member = MemberProcessor.GetMember(userId);
+                                            if (member.MEMBER_PIC == null)
+                                            {
+                                                <img class="img-md rounded-circle" src="~/images/NoImage.jpg" alt="Profile image" width="40" height="40">
+
+                                            }
+                                            else
+                                            {
+                                                <img class="img-md rounded-circle" src="~/images/@member.MEMBER_PIC" width="40" height="40" alt="Profile image">
+
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                            <img class="img-md rounded-circle" src="~/images/NoImage.jpg" width="40" alt="Profile image">
+                                        }
+                                    }
+                                    <p class="mb-1 mt-3">@user.Name</p>
+                                    <p class="font-weight-light text-muted mb-0">@user.Email</p>
+                                </div>
+                                @if (await UserManager.IsInRoleAsync(user, "Admin"))
+                                {
+                                    <a class="dropdown-item"><i class="dropdown-item-icon icon-user "></i> My Profile <span class="badge badge-pill badge-danger">1</span></a>
+                                }
+                                @if (await UserManager.IsInRoleAsync(user, "VENDOR"))
+                                {
+                                    <a class="dropdown-item" href="#"><i class="dropdown-item-icon icon-user "></i> My Profile @*<span class="badge badge-pill badge-danger">1</span>*@</a>
+                                    /**/
+                                }
+                                @if (await UserManager.IsInRoleAsync(user, "Member"))
+                                {
+                                    <a class="dropdown-item" asp-action="EditMember" asp-controller="Member"><i class="dropdown-item-icon icon-user "></i> My Profile @*<span class="badge badge-pill badge-danger">1</span>*@</a>
+                                }
+
+
+                                @if (await UserManager.IsInRoleAsync(user, "CONSULTANT"))
+                                {
+                                    <a class="dropdown-item"><i class="dropdown-item-icon icon-user "></i> My Profile @*<span class="badge badge-pill badge-danger">1</span>*@</a>
+                                }
+                                @*<a class="dropdown-item"><i class="dropdown-item-icon icon-speech text-primary"></i> Messages</a>
+                                <a class="dropdown-item"><i class="dropdown-item-icon icon-energy text-primary"></i> Activity</a>*@
+                                <a class="dropdown-item"><i class="dropdown-item-icon icon-question "></i> FAQ</a>
+                                <a class="dropdown-item" href="/Account/Logout"><i class="dropdown-item-icon icon-power "></i>Sign Out</a>
+                            </div>
+                        </li>
+                        @if (await UserManager.IsInRoleAsync(user, "Member"))
+                        {
+                            <li><a class="dropdown-item" href="/Account/Logout"><i class="dropdown-item-icon icon-power "></i>Sign Out</a></li>
+                        }
+                        else
+                        {
+                            <li><a class="dropdown-item" href="/Account/Login"><i class="dropdown-item-icon icon-power "></i>LogIn</a></li>
+                        }
+
+                    </ul>
+                    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+                        <span class="icon-menu"></span>
+                    </button>
+                </div>
+            </nav>
+        }
+        else
+        { <nav class="navbar  default-layout-navbar col-lg-12 col-12 p-0  d-flex flex-row">
+
+                <div class="navbar-menu-wrapper d-flex align-items-center flex-grow-1">
+
+                    <div class="navbar-brand-wrapper  d-flex align-items-center" style=" background-color:white !important;   ">
+                        <a class="navbar-brand brand-logo head_color logo-hover" href="#">
+                            <div class="row pr-0">
+                                <div class=" col">
+                                    @*<img src="~/AdminTheme/images/LABANTAB.png" alt="logo" class="logo-dark" />*@
+                                </div>
+                                <div class="col " style="margin-top:18px;">
+                                    <a href="/Home/LandingPage" style=" text-decoration: none;"> <h3 class="mb-sm-5 font-weight-medium d-none d-lg-flex  "  style="color:#BF9D40;"><b>WEBLETSCRIPT</b></h3></a>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="navbar-brand brand-logo-mini" href="#"><img src="~/AdminTheme/images/LABANTAB.png" alt="logo" /></a>
+                    </div>
+
+                    <ul class="navbar-nav navbar-nav-right ml-auto">
+                        <div class="icon-container">
+                            <i class="icon-bubbles icon-md" onclick=" window.location.href='/Support/SupportView'"></i>
+
+                            <div class="dot-indicator bg-danger"></div>
+                        </div>
+
+                        <li class="nav-item dropdown d-none d-xl-inline-flex user-dropdown">
+                            <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                                <img class="img-xs rounded-circle ml-2" src="~/AdminTheme/images/faces/face8.jpg" alt="Profile image"> <span class="font-weight-normal"> User Name </span>
+                      
+                                   
+
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+                                <div class="dropdown-header text-center">
+                                   
+                                        <img class="img-xs rounded-circle ml-2" src="~/AdminTheme/images/faces/face8.jpg" alt="Profile image"> <span class="font-weight-normal"> @user.Name </span>
+
+
+                               
+                                    @*<p class="mb-1 mt-3">@user.Name</p>
+                                    <p class="font-weight-light text-muted mb-0">@user.Email</p>*@
+                                </div>
+                             
+                                @*<a class="dropdown-item"><i class="dropdown-item-icon icon-speech text-primary"></i> Messages</a>
+                                <a class="dropdown-item"><i class="dropdown-item-icon icon-energy text-primary"></i> Activity</a>*@
+                                <a class="dropdown-item"><i class="dropdown-item-icon icon-question "></i> FAQ</a>
+                                <a class="dropdown-item" href="/Account/Logout"><i class="dropdown-item-icon icon-power "></i>Sign Out</a>
+                            </div>
+                        </li>
+                      
+                            <li><a class="dropdown-item" href="/Account/Login"><i class="dropdown-item-icon icon-power "></i>LogIn</a></li>
+                        
+
+                    </ul>
+                    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+                        <span class="icon-menu"></span>
+                    </button>
+                </div>
+            </nav>}
+        <!-- partial -->
+        <div class="container-fluid  ">
+            <!-- partial:partials/_sidebar.html -->
+            <nav class="sidebar sidebar-offcanvas head_color " hidden id="sidebar">
+            </nav>
+
+            @RenderBody()
+        </div>
+    </div>
+    <script src="~/js/jquery/jquery-3.2.1.min.js"></script>
+    <script src="~/AdminTheme/vendors/js/vendor.bundle.base.js"></script>
+    <script src="~/AdminTheme/vendors/chart.js/Chart.min.js"></script>
+    <script src="~/AdminTheme/vendors/moment/moment.min.js"></script>
+    <script src="~/AdminTheme/vendors/daterangepicker/daterangepicker.js"></script>
+    @*<script src="~/AdminTheme/vendors/chartist/chartist.min.js"></script>*@
+    <script src="~/js/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/js/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/js/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/js/datatables-buttons/js/buttons.flash.min.js"></script>
+    <script src="~/js/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/js/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/AdminTheme/js/off-canvas.js"></script>
+    <script src="~/AdminTheme/js/misc.js"></script>
+    <script src="~/AdminTheme/js/dashboard.js"></script>
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "initComplete": function (settings, json) {
+                    $("#example1").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                }
+            });
+            $("#example2").DataTable({
+                "initComplete": function (settings, json) {
+                    $("#example2").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+                },
+                searching: false,
+                paging: false
+
+            });
+        });
+    </script>
+</body>
+</html>

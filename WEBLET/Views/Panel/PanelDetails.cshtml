@@ -1,0 +1,319 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<head>
+    <style>
+        .header_color {
+            background-color: #BF9D40;
+            color: white;
+            font-weight: 900;
+        }
+    </style>
+    <script src="~/js/jquery/jquery-3.2.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="~/js/API/ApiCalls.js"></script>
+    <script src="~/js/API/Alerts.js"></script>
+    <script>
+    
+    </script>
+    <style>
+        .header_color {
+            background-color: #BF9D40;
+            color: white;
+            font-weight: 900;
+        }
+
+        .badge-blue {
+            background-color: steelblue;
+        }
+
+        .child {
+            background-color: #f0d27f
+        }
+
+        .Image1 {
+            position: relative;
+            width: 100%;
+            max-width: 100px;
+        }
+
+        .image {
+            display: block;
+            width: 80%;
+            height: auto;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+            transition: .3s ease;
+            background-color: red;
+        }
+
+        .Image1:hover .overlay {
+            opacity: 1;
+        }
+
+        .icon {
+            color: white;
+            font-size: 100px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .fa-user:hover {
+            color: #eee;
+        }
+
+        .header_color {
+            background-color: #BF9D40;
+            color: white;
+            font-weight: 900;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        #loading {
+            background: url('spinner.gif') no-repeat center center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: 9999999;
+        }
+
+        .alert-success {
+            color: #298A08;
+        }
+
+        .text-brown {
+            color: #BF9D40;
+        }
+
+        .MyIcon {
+            font-size: 40px;
+            position: absolute;
+            top: 80%;
+            left: 20%;
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .MyOverlay {
+            position: absolute;
+            top: 0;
+            bottom: 20px;
+            left: 0px;
+            right: 30px;
+            height: 70%;
+            width: 40%;
+            opacity: 0;
+            transition: .3s ease;
+            padding: 80px;
+            background-color: lightgray;
+        }
+
+        .Image1:hover .MyOverlay {
+            opacity: .5;
+        }
+    </style>
+
+</head>
+@using WEBLET.BusinessLogics;
+@{
+    var panel = PanelProcessor.PanelList();
+}
+@*<div class="row card card-outline-warning ">
+    <div class="card-header card-title header_color text-white">Panel Details</div>
+
+    <div class="col-12 grid-margin stretch-card">
+
+        <div class="card-body">
+        </div>
+    </div>
+</div>*@
+<div class="main-panel">
+    <div class="content-wrapper">
+
+
+        <div class="row card card-outline-warning ">
+            <div class="card-header card-title header_color text-white">Panel Details</div>
+
+            <div class="col-12 grid-margin stretch-card">
+
+                <div class="card-body">
+                    <form class="forms-sample" id="Vform">
+                        <input id="ID" hidden />
+                        <div class="row mt-2">
+                            <div class="col-sm-3" id="ICode">
+                                <label class="text-sm heighttext">select Panel</label>
+                                <div class="input-group mb-sm-3">
+                                    <select class="form-control form-control-sm select2 heighttext" style="width: 100%;" id="PANEL_ID">
+                                        <option selected="selected" value="" disabled>select panel</option>
+                                        @foreach (var item in panel)
+                                        {
+                                            <option value="@item.ID">@item.Panel_Name (@item.Panel_Code)</option>
+                                        }
+                                    </select>
+                                  
+                                </div>
+                            </div>
+                            <div class="col-sm-3 offset-1" id="ICode">
+                                <label class="text-sm heighttext">Details Number</label>
+                                <div class="input-group mb-2">
+                                    <input type="number" class="form-control form-control-sm heighttext" id="PanelDetailsNumber" value="" placeholder="Details Number" readonly />
+                                    <div class="input-group-append heighttext">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" id="basic-addon2"  onclick="LoadDetails(this)"><b><i class="fas fa-search"></i></b></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        @*heading*@
+                    <div class="mt-sm-3">
+                        <h3 class="text-success">Discription Condition & Payment</h3>
+                        <hr class="bg-danger" />
+                    </div>
+
+                        <div class="row mb-4">
+                            <div class="form-group col-sm-5">
+                                <label class="heighttext"><b>Discription </b></label>
+
+                                <textarea class="form-control heighttext" id="DISCRIPTION"></textarea>
+                            </div>
+
+                            <div class="form-group col-sm-5">
+                                <label class="heighttext"><b>Condition </b></label>
+
+                                <textarea class="form-control heighttext" id="CONDITION"></textarea>
+                            </div>
+
+                            <div class="col-sm-3 " id="ICode">
+                                <label class="text-sm heighttext">Payment</label>
+                                <div class="input-group mb-2">
+                                    <input type="number" class="form-control form-control-sm heighttext" id="PRICE" value="" placeholder="Payment" />
+                                    <div class="input-group-append ">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text heighttext" id="basic-addon2"><b>$</b></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @*heading*@
+                    <div>
+                        <h3 class="text-success "> Delivery & Returns</h3>
+                        <hr class="bg-danger"/>
+                    </div>
+
+                        <div class="row mb-sm-3">
+                            <div class="form-group col-sm-3">
+                                <label class="heighttext"><b>Delevery Day</b></label>
+
+                                <input type="number" class="form-control heighttext" id="DELEVERYDAY">
+                            </div>
+
+                            <div class="form-group offset-sm-1 col-sm-3">
+                                <label class="heighttext"><b>From Days</b></label>
+
+                                <input type="number" class="form-control heighttext" placeholder="From Days" id="FROM_DATE">
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label class="heighttext"><b>To Days</b></label>
+
+                                <input type="number" class="form-control heighttext"  placeholder="To Days" id="TO_DATE">
+                            </div>
+                            <div class="col-sm-3" id="ICode">
+                                <label class="text-sm heighttext">Delevery Charges</label>
+                                <div class="input-group mb-2">
+                                    <input type="number" class="form-control form-control-sm heighttext" id="SHIPMRNT" value="" placeholder="Delevery Charges" />
+                                    <div class="input-group-append heighttext">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" id="basic-addon2"><b>$</b></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-5">
+                                <label class="heighttext"><b>Demo Link </b></label>
+
+                                <textarea class="form-control heighttext" id="DEMO_LINK" placeholder="Delivery Discription"></textarea>
+                            </div>
+                            <div class="form-group col-sm-5">
+                                <label class="heighttext"><b>Returns Discription </b></label>
+
+                                <textarea class="form-control heighttext" id="RETURNS_DIS" placeholder="Returns Discription"></textarea>
+                            </div>
+                        </div>
+                        @*heading*@
+                    <div>
+                        <h3 class="text-success  ">  Add Hosting Pictuer</h3>
+                        <hr class="bg-danger"/>
+                    </div>
+                       
+                        <div class="row mb-sm-3  " id="Pb_List">
+                            @*<label>Add Hosting Pictuer</label>*@
+                       
+                        </div>
+
+
+
+                    </form>
+                    <div class="row">
+                        @Html.Partial("CrusBtns")
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    @using WEBLET.ViewModels;
+    @Html.Partial("LoadingModal")
+    @{
+        string[] array = { "Panel Name", "Discription", "Price", "Delevery Days"  };
+    }
+    @Html.Partial("SearchModalLarge", new ModalViewMoal { Name = "Panels Details", tableId = "Purchases", Columns = array, ModelSize = "100%" })
+
+    @Html.Partial("footer")
+</div>
+<script src="~/js/LabanJs/PanelDetails.js"></script>
+<script>
+
+
+
+</script>

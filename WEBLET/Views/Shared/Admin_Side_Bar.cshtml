@@ -1,0 +1,94 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    string userId = UserManager.GetUserId(User);
+    ApplicationUser user = await UserManager.GetUserAsync(User);
+}
+@using WEBLET.Data;
+@using WEBLET.Models;
+@using WEBLET.BusinessLogics;
+@using Microsoft.AspNetCore.Http;
+
+
+<li class="nav-item nav-profile">
+    <a href="#" class="nav-link">
+        <div class="profile-image">
+            <img class="img-xs rounded-circle" src="~/AdminTheme/images/faces/face8.jpg" alt="profile image">
+            <div class="dot-indicator bg-success"></div>
+        </div>
+        <div class="text-wrapper">
+            <p class="profile-name text-dark">@user.Name</p>
+            <p class="designation text-dark">Administrator</p>
+        </div>
+        <div class="icon-container">
+            @*<i class="icon-bubbles"></i>*@
+            @*<div class="dot-indicator bg-danger"></div>*@
+        </div>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link text-dark" onclick=" window.location.href='/RoleCreateAccount/RoleRegistration'">
+        <span class="menu-title">DashBoard</span>
+        <i class="icon-screen-desktop menu-icon"></i>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a class="nav-link text-dark" href="/RoleCreateAccount/RoleRegistration">
+        <span class="menu-title">Create Account</span>
+        <i class=" icon-directions menu-icon"></i>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link text-dark" href="/Panel/Panels">
+        <span class="menu-title">Panel</span>
+        <i class=" icon-directions menu-icon"></i>
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link text-dark" href="/Panel/PanelDetailsView">
+        <span class="menu-title">Panel Details</span>
+        <i class=" icon-directions menu-icon"></i>
+    </a>
+</li>
+
+
+
+
+@*<li class="nav-item">
+        <a class="nav-link text-dark" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+            <span class="menu-title">Vendor Management</span>
+            <i class=" icon-diamond  menu-icon"></i>
+        </a>
+        <div class="collapse" id="ui-basic">
+            <ul class="nav flex-column sub-menu">
+                <li class="nav-item">
+                    <a class="nav-link text-dark"  href="/Vendor/VendorView">
+                        <span class=" menu-title">Add Vendor</span>
+
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/Dealer/LoadDealers">
+                        <span class=" menu-title"> Vendors List</span>
+
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/Stock/StockIssue">
+                        <span class=" menu-title"> Issue Plots</span>
+
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </li>*@
+
+
+
+
+

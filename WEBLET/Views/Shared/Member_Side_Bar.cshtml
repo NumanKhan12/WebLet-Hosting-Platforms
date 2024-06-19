@@ -1,0 +1,133 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    string userId = UserManager.GetUserId(User);
+    ApplicationUser user = await UserManager.GetUserAsync(User);
+}
+@using WEBLET.Data;
+@using WEBLET.Models;
+@using WEBLET.BusinessLogics;
+
+ @{Member member = MemberProcessor.GetMember(userId);}
+<li class="nav-item nav-profile">
+    <a href="#" class="nav-link">
+        <div class="profile-image">
+            @if (member.MEMBER_PIC == null)
+            {
+                <img class="img-md rounded-circle" src="~/images/NoImage.jpg" alt="Profile image" width="40" height="40">
+            }
+            else
+            {
+                <img class="img-md rounded-circle" src="~/images/@member.MEMBER_PIC" width="40" height="40" alt="Profile image">
+            }
+            <div class="dot-indicator bg-success"></div>
+        </div>
+        <div class="text-wrapper">
+            <p class="profile-name text-dark "><span style="width:40%">@user.Name</span></p>
+            <p class="designation text-dark">Customer</p>
+        </div>
+        <div class="icon-container">
+            @*<i class="icon-bubbles" onclick=" window.location.href='/Support/SupportView'"></i>*@
+            @*<div class="dot-indicator bg-danger"></div>*@
+        </div>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link text-dark" onclick=" window.location.href='/Dashboard/MemberDashbord'">
+        <span class="menu-title">DashBoard</span>
+        <i class="icon-screen-desktop menu-icon"></i>
+    </a>
+</li>
+@*<li class="nav-item">
+    <a class="nav-link text-dark" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+        <span class="menu-title">Property</span>
+        <i class=" icon-home menu-icon"></i>
+    </a>
+    <div class="collapse" id="ui-basic">
+        <ul class="nav flex-column sub-menu">
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="/Booking/ViewBookings">
+                    <span class=" menu-title">Bookings</span>
+
+                </a>
+            </li>
+        </ul>
+    </div>
+</li>*@
+@*<li class="nav-item">
+    <a class="nav-link text-dark" data-toggle="collapse" href="#ui-basic1" aria-expanded="false" aria-controls="ui-basic">
+        <span class="menu-title">Accounts</span>
+        <i class=" icon-notebook menu-icon"></i>
+    </a>
+    <div class="collapse" id="ui-basic1">
+        <ul class="nav flex-column sub-menu">
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="/BalanceSheet/ViewMemberBalanceSheet">
+                    <span class=" menu-title">Account Summery</span>
+
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="/BalanceSheet/ViewTransactionHistory">
+
+                    <span class=" menu-title">Transcation History</span>
+                </a>
+            </li>
+
+
+        </ul>
+    </div>
+</li>*@
+
+@*<li class="nav-item">
+    <a class="nav-link text-dark" onclick=" window.location.href='/Support/SupportView'">
+        <span class="menu-title">Support</span>
+        <i class=" icon-wrench menu-icon"></i>
+    </a>
+</li>*@
+@*<li class="nav-item">
+    <a class="nav-link text-dark" href="https://labangarden.pk/sops/" target="_blank">
+        <span class="menu-title">SOP's</span>
+        <i class=" icon-note menu-icon"></i>
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link text-dark" href="https://labangarden.pk/faqs/" target="_blank">
+        <span class="menu-title">FAQ's</span>
+        <i class=" icon-question menu-icon"></i>
+    </a>
+</li>*@
+@*<li class="nav-item">
+    <a class="nav-link text-dark"  asp-action="CustomerPaymentView" asp-controller="CustomerPayment" asp-route-MEMBER_ID="@member.MEMBER_ID">
+        <span class="menu-title">Pay Installment</span>
+        <i class=" icon-paypal menu-icon"></i>
+    </a>
+</li>*@
+
+<li class="nav-item">
+    <a class="nav-link text-dark" data-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic">
+        <span class="menu-title">Profile</span>
+        <i class=" i icon-user-follow menu-icon"></i>
+    </a>
+    <div class="collapse" id="ui-basic2">
+        <ul class="nav flex-column sub-menu">
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-action="EditMember" asp-controller="Member">
+                    <span class="ml-2 menu-title">My Profile</span>
+
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="/Account/ChangePassword">
+
+                    <span class="ml-2 menu-title">Change Password</span>
+                </a>
+            </li>
+
+
+        </ul>
+    </div>
+</li>

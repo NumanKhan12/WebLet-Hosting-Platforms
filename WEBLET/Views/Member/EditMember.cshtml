@@ -1,0 +1,366 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ApplicationUser user = await UserManager.GetUserAsync(User);
+}
+@using WEBLET.Data;
+@using WEBLET.Models;
+@using WEBLET.BusinessLogics;
+@{
+    Member member = MemberProcessor.GetMember(user.Id);
+}
+<script src="~/js/jquery/jquery-3.2.1.min.js"></script>
+
+<head>
+    <style>
+        .header_color {
+            background-color: #BF9D40;
+            color: white;
+            font-weight: 900;
+        }
+
+        .badge-blue {
+            background-color: steelblue;
+        }
+
+        .child {
+            background-color: #f0d27f
+        }
+        .Image1 {
+            position: relative;
+            width: 100%;
+            max-width: 100px;
+        }
+
+        .image {
+            display: block;
+            width: 80%;
+            height: auto;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+            transition: .3s ease;
+            background-color: red;
+        }
+
+        .Image1:hover .overlay {
+            opacity: 1;
+        }
+
+        .icon {
+            color: white;
+            font-size: 100px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .fa-user:hover {
+            color: #eee;
+        }
+
+        .header_color {
+            background-color: #BF9D40;
+            color: white;
+            font-weight: 900;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        #loading {
+            background: url('spinner.gif') no-repeat center center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: 9999999;
+        }
+
+        .alert-success {
+            color: #298A08;
+        }
+
+        .text-brown {
+            color: #BF9D40;
+        }
+
+        .MyIcon {
+            font-size: 40px;
+            position: absolute;
+            top: 80%;
+            left: 20%;
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .MyOverlay {
+            position: absolute;
+            top: 0;
+            bottom: 20px;
+            left: 0px;
+            right: 30px;
+            height: 70%;
+            width: 40%;
+            opacity: 0;
+            transition: .3s ease;
+            padding: 80px;
+            background-color: lightgray;
+        }
+
+        .Image1:hover .MyOverlay {
+            opacity: .5;
+        }
+    </style>
+</head>
+<div class="main-panel">
+    <div class="content-wrapper">
+
+
+        <div class="row card card-outline-warning ">
+            <div class="card-header card-title header_color text-white">Member Registration</div>
+
+            <div class="col-12 grid-margin stretch-card">
+
+                <div class="card-body">
+
+                    <div class="row">
+
+
+                        <div class="col-md-4 grid-margin stretch-card">
+                            <div class="card card-outline-warning">
+                                <div class="card-header child card-title ">User Information</div>
+                                <div class="card-body">
+                                    <form class="forms-sample">
+                                        <div class="form-group">
+                                            <label><b>Name</b></label>
+                                            <input type="text" class="form-control  heighttext" id="MEMBER_NAME" placeholder="Username" value="@user.Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label><b>Mobile Number</b></label><br />
+                                            <input type="text" class="form-control  heighttext" id="M_NUMBER"  placeholder="Username" value="@user.PhoneNumber" onkeydown="phonefunc(this, event)" onkeypress="return isnumer2(event,this)">
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label><b>Email</b></label><br />
+                                            <p class="badge badge-blue text-white" style=" font-size:medium">@user.Email</p>
+                                        </div>
+                                        <div class="Image1" id="">
+                                            @if (member.MEMBER_PIC != null)
+                                            {
+                                                <img src="~/images/@member.MEMBER_PIC" width="160" height="160" style=" margin-bottom: 10px;" id="USER_PIC" />
+
+                                            }
+                                            else
+                                            {
+                                                <img src="~/images/dummy-user.jpg" width="160" height="160" style="margin-bottom: 10px;" id="USER_PIC" />
+
+                                            }
+                                             <div class="MyOverlay" onclick="document.getElementById('MEMBERPIC').click()">
+                                                <a href="#" class="MyIcon" title="User Profile">
+                                                    <i class="fa fa-camera"></i>
+                                                </a>
+                                            </div>
+                                            <input style="width:100px !important" type="file" class="" accept="image/jpeg,image/gif,image/png" id="MEMBERPIC" hidden onchange="readURL(this,'USER_PIC')">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8 grid-margin stretch-card">
+                            <div class="card card-outline-warning">
+                                <div class="card-header child card-title ">Personal Information</div>
+                                <div class="card-body">
+
+                                    <form class="forms-sample">
+                                        <div class="row ">
+                                            <div class="col-sm-4">
+                                                <div class="form-group ">
+                                                    <label><b>Title</b></label>
+                                                    <script>
+                                                       jQuery(document).ready(function($){
+                                                           $('#MEMBER_TITLE').val('@member.MEMBER_TITLE');
+                                                           $('#MEMBER_COUNTRY').val('@member.MEMBER_COUNTRY');
+                                                        });
+                                                    </script>
+                                                    @*<select class="form-control  heighttext" id="MEMBER_TITLE">
+                                                        <option value="">Select Title</option>
+                                                        <option value="S/O">S/O</option>
+                                                        <option value="F/O">F/O</option>
+                                                        <option value="D/O">D/O</option>
+                                                    </select>*@
+                                                </div>
+                                            </div>
+                                            @*<div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label><b>Father/Spouse Name</b></label>
+                                                    <input type="text" class="form-control heighttext" id="MEMBER_FATHER_NAME" value="@member.MEMBER_FATHER_NAME" placeholder="Father Name">
+                                                </div>
+                                            </div>*@
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                <div class="form-group">
+                                                    <label><b>Date of Birth</b></label>
+                                                    <input type="date" class="form-control  heighttext" id="MEMBER_DOB" value="@member.MEMBER_DOB.ToString("yyyy-MM-dd")" placeholder="Date of Birth">
+                                                </div>
+                                            </div>
+                                            @*<div class="col-sm-5">
+                                                <div class="form-group">
+                                                    <label><b>CNIC</b></label>
+                                                    <input type="text" disabled class="form-control heighttext" id="MEMBER_CNIC" value="@user.cNIC">
+                                                </div>
+                                            </div>*@
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label><b>Address</b></label>
+                                            <input type="email" class="form-control heighttext" value="@member.MEMBER_ADDRESS" id="MEMBER_ADDRESS" placeholder="Complete Address Line">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                <div class="form-group">
+                                                    <label><b>Country</b></label>
+                                                    
+                                                    @Html.Partial("CountriesCode")
+                                                    @*<input class="form-control heighttext" value="@member.MEMBER_COUNTRY" id="MEMBER_COUNTRY" placeholder="Country" />*@
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <div class="form-group">
+                                                    <label><b>City</b></label>
+                                                    <input class="form-control heighttext" id="MEMBER_CITY" value="@member.MEMBER_CITY" placeholder="City">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button class="child btn " onclick="save(this)" type="button" id="sb">Submit</button>
+
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- content-wrapper ends -->
+    <!-- partial:../../partials/_footer.html -->
+    @Html.Partial("footer")
+    <!-- partial -->
+</div>
+<form id="Cform"></form>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="~/js/API/Alerts.js"></script>
+<script src="~/js/API/ApiCalls.js"></script>
+<script>
+    function readURL(input,id) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#' + id)
+                    .attr('src', e.target.result)
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    function RefereshForm() {
+        document.getElementById('sb').disabled = false;
+    }
+    function save(btn) {
+        var MEMBER_NAME = document.getElementById("MEMBER_NAME").value;
+        var MEMBER_TITLE = document.getElementById("MEMBER_TITLE").value;
+        //var MEMBER_FATHER_NAME = document.getElementById("MEMBER_FATHER_NAME").value;
+        var MEMBER_DOB = document.getElementById("MEMBER_DOB").value;
+        //var MEMBER_CNIC = document.getElementById("MEMBER_CNIC").value;
+        var M_NUMBER = document.getElementById("M_NUMBER").value;
+        var MEMBER_COUNTRY = document.getElementById("MEMBER_COUNTRY").value;
+        var MEMBER_CITY = document.getElementById("MEMBER_CITY").value;
+        var MEMBER_ADDRESS = document.getElementById("MEMBER_ADDRESS").value;
+        if (MEMBER_NAME == '') {
+            Alert('error', 'Enter Member Name');
+            document.getElementById('MEMBER_NAME').focus();
+        //} else if (MEMBER_FATHER_NAME == '') {
+        //    Alert('error', 'Enter Father Name');
+        //    document.getElementById('MEMBER_FATHER_NAME').focus();
+        } else if (MEMBER_DOB == '') {
+            Alert('error', 'Enter Member Date of Birth');
+            document.getElementById('MEMBER_DOB').focus();
+        }
+        else if (MEMBER_ADDRESS == '') {
+            Alert('error', 'Enter Address');
+            document.getElementById('MEMBER_ADDRESS').focus();
+        } else if (MEMBER_COUNTRY == '') {
+            Alert('error', 'Enter Country');
+            document.getElementById('MEMBER_COUNTRY').focus();
+        } else if (MEMBER_CITY == '') {
+            Alert('error', 'Enter City');
+            document.getElementById('MEMBER_CITY').focus();
+        } else {
+            data = {
+                "MEMBER_NAME": MEMBER_NAME,
+                "MEMBER_TITLE": MEMBER_TITLE,
+              //  "MEMBER_FATHER_NAME": MEMBER_FATHER_NAME,
+                "MEMBER_DOB": MEMBER_DOB,
+                "MEMBER_COUNTRY": MEMBER_COUNTRY,
+                "M_NUMBER": M_NUMBER,
+                "MEMBER_CITY": MEMBER_CITY,
+                "MEMBER_ADDRESS": MEMBER_ADDRESS,
+            }
+            var file_data = $("#MEMBERPIC").prop("files")[0];
+            var form_data = new FormData();
+            form_data.append("data", JSON.stringify(data));
+            form_data.append("file", file_data);
+            var apicall = ['POST', 'EditMember', btn, form_data, "Saved Successfully", 'Cform', true];
+            ConfirmationAlert("Do you want to Save the record? ", "Yes", "No", AjaxButtonCallForImage, apicall);
+        }
+    }
+
+    function isnumer2(evt, input) {
+        //evt = (evt) ? evt : window.event;
+        //var charCode = (evt.which) ? evt.which : evt.keyCode;
+        //if (charCode > 31 && (charCode < 48 || charCode > 57) || input.value.length > 11) {
+        //    return false;
+        //}
+        return true;
+    }
+    function phonefunc(input, evt) {
+        //evt = (evt) ? evt : window.event;
+        //var charCode = (evt.which) ? evt.which : evt.keyCode;
+        //if ((input.value.length == 4) && charCode !== 8) {
+        //    input.value = input.value + '-';
+        //}
+    }
+</script>
+

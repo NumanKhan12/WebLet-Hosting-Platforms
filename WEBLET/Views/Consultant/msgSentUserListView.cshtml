@@ -1,0 +1,79 @@
+﻿
+@using WEBLET.BusinessLogics;
+@{
+    var listDeta = ChatProccess.IsSentMsgUserList();
+}
+<ul>
+    @foreach (var item in listDeta)
+    {
+
+        AspNetUserConnection dataInfo = ChatProccess.AspNetUserConnectionData(item.Id);
+        @*string chack_online = "offline";
+            @if (ChatProccess.IsChackOnline(item.Id)) { chack_online = "online"; }*@
+        @if (dataInfo.MSG_ISREADE == "0")
+        {
+            <li onclick="loadUserChat('@item.Id', '@item.Name', '@item.Email', '@dataInfo.IS_ONLINE')">
+                <img src="~/images/us.png" style="height:40px; width:40px;" alt="">
+                <div>
+                    <h2><b>@item.Name</b></h2>
+                    <h3 style="text-align:right">
+            <span class="status green" style="color:orange"><i class="fa fa-circle m-1" aria-hidden="true"></i>MSG</span>
+
+        </h3>
+                    @if (ChatProccess.IsChackOnline(item.Id))
+                    {
+                        @*<h3>
+                <span class="status green" style="color:orange"><i class="fa fa-circle m-1" aria-hidden="true"></i>online</span>
+
+            </h3>*@
+                    }
+                    else
+                    {
+                        @*<h2>
+
+                <span class="status orange" style="color:green">offline</span>
+
+            </h2>*@
+                    }
+
+                </div>
+            </li>
+        }
+
+    }
+
+    @foreach (var item in listDeta)
+    {
+
+        AspNetUserConnection dataInfo = ChatProccess.AspNetUserConnectionData(item.Id);
+        @*string chack_online = "offline";
+            @if (ChatProccess.IsChackOnline(item.Id)) { chack_online = "online"; }*@
+        @if (dataInfo.MSG_ISREADE == "1")
+        {
+            <li onclick="loadUserChat('@item.Id', '@item.Name', '@item.Email', '@dataInfo.IS_ONLINE')">
+                <img src="~/images/us.png" style="height:40px; width:40px;" alt="">
+                <div>
+                    <h2><b>@item.Name</b></h2>
+
+                    @if (ChatProccess.IsChackOnline(item.Id))
+                    {
+                        @*<h3>
+                                <span class="status green" style="color:orange"><i class="fa fa-circle m-1" aria-hidden="true"></i>online</span>
+
+                            </h3>*@
+                    }
+                    else
+                    {
+                        @*<h2>
+
+                                <span class="status orange" style="color:green">offline</span>
+
+                            </h2>*@
+                    }
+
+                </div>
+            </li>
+        }
+    }
+
+  </ul>

@@ -1,0 +1,23 @@
+﻿@model IEnumerable<ASP_SM_PANEL>
+
+<table class="table" id="example1">
+    <thead>
+        <tr>
+            <th>Panel Code</th>
+            <th>Panel Name</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr onclick="SetValues('@item.ID','@item.Panel_Code','@item.Panel_Name')">
+                <td>@item.Panel_Code</td>
+                <td>@item.Panel_Name</td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+

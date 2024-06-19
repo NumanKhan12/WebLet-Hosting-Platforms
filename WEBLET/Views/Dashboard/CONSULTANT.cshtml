@@ -1,0 +1,229 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<head>
+    <style>
+        .header_color {
+            background-color: #BF9D40;
+            color: white;
+            font-weight: 900;
+        }
+    </style>
+    <script src="~/js/jquery/jquery-3.2.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="~/js/API/ApiCalls.js"></script>
+    <script src="~/js/API/Alerts.js"></script>
+
+
+    <link href="~/css/styleChatCunsultant.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    @*<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>*@
+    <style>
+        .asq {
+            background-color: #abd9e9;
+            font-family: Arial;
+            box-sizing: border-box;
+        }
+
+        #containeropo {
+            width: 100%;
+            height: 600px;
+            background: #eff3f7;
+            margin: 0 auto;
+            font-size: 0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        aside {
+            width: 100%;
+            height: 700px;
+            background-color: #3b3e49;
+            display: inline-block;
+            font-size: 15px;
+            vertical-align: top;
+        }
+
+
+            aside header {
+                padding: 30px 20px;
+            }
+
+            aside input {
+                width: 100%;
+                height: 50px;
+                line-height: 50px;
+                padding: 0 50px 0 20px;
+                background-color: #5e616a;
+                border: none;
+                border-radius: 3px;
+                color: #fff;
+                background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_search.png);
+                background-repeat: no-repeat;
+                background-position: 250px;
+                background-size: 40px;
+            }
+
+                aside input::placeholder {
+                    color: #fff;
+                }
+
+            aside ul {
+                padding-left: 0;
+                margin: 0;
+                list-style-type: none;
+                overflow-y: scroll;
+                height: 690px;
+            }
+
+            aside li {
+                padding: 10px 0;
+            }
+
+                aside li:hover {
+                    background-color: #5e616a;
+                }
+
+        h2, h3 {
+            margin: 0;
+        }
+
+        aside li img {
+            border-radius: 50%;
+            margin-left: 20px;
+            margin-right: 8px;
+        }
+
+        aside li div {
+            display: inline-block;
+            vertical-align: top;
+            margin-top: 12px;
+        }
+
+        aside li h2 {
+            font-size: 14px;
+            color: #fff;
+            font-weight: normal;
+            margin-bottom: 5px;
+        }
+
+        aside li h3 {
+            font-size: 12px;
+            color: #7e818a;
+            font-weight: normal;
+        }
+    </style>
+</head>
+
+<script>
+    var cruntIdCunsltantUser="";
+</script>
+<div class="row   w-100" style="width:100%">
+    <div class="col-sm-3">
+        <div class="userList1">
+            <div class="asq">
+                <div id="containeropo">
+                    <aside>
+                        <header>
+                            <h5 style="text-align:center;border:2px solid white;color:white;">CHATS</h5>
+                            @*<input type="text" placeholder="search" hidden style="width: 100%;">*@
+                           <input hidden id="setId"/>
+                        </header>
+                        <div id="sentmsgUser"> </div>
+                        
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-8 border">
+        <div class="bodyas    ml-1 d-flex justify-content-end ">
+            <div class="containerA ">
+                <!-- chat box -->
+                <div class="chat-box w-100 ">
+                    <!-- client -->
+                  
+                    <div class="client ">
+                        <img src="~/images/us.png" alt="logo" />
+                        <div class="client-info mt-3 ">
+                            <h5 style="line-height: 10px;" id="ChatuserName">CONSULTANT</h5>
+                            <p id="chack_state" class="mt-2">online</p>
+                        </div>
+                    </div>
+                    <div style="height: 200px;" id="loadChat" class=" ">
+                        <!-- main chat section -->
+
+                    </div>
+
+                    <!-- input field section -->
+                    <div class="chat-input ">
+                        <input type="text" placeholder="Enter Message" id="ConsultantmessageInput" />
+                        <input hidden id="messageInput"/>
+                        <button class="send-btn" id="ConsultantsendButton">
+                            <img src="~/images/send.png" alt="send-btn">
+                        </button>
+                        <button id="sendButton" hidden></button>
+                    </div>
+                </div>
+
+                <!-- button -->
+                @*<div class="d-flex justify-content-end">
+                        <div class="chat-btn">
+                            <img src="~/images/Circle-icons-chat.svg.png" alt="chat box icon btn">
+                        </div>
+                    </div>*@
+            </div>
+        </div>
+    </div>
+    @Html.Partial("LoadingModal")
+</div>
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>
+<script>
+    window.onload = function () {
+        LoadSentMsgUserList();
+
+    };
+    function loadUserChat(id, name, email, chack_online) {
+        console.log(id);
+        document.getElementById('loadChat').innerHTML = 'wait';
+        document.getElementById('ChatuserName').innerHTML = name;
+        document.getElementById('chack_state').innerHTML = chack_online;
+
+        document.getElementById('setId').value = id;
+        cruntIdCunsltantUser = email;
+
+        data = {
+            "Id": id,
+            "Email": name,
+            "Name": email,
+        }
+
+
+        LoadpartialviewForChatLoad('GET', '/Consultant/LoadUserChat', data, 'loadChat', 'modal-defaul', 'loadingModal')
+        LoadSentMsgUserList();
+       
+        //var lop = document.getElementById('soddown').value;
+        
+        //downn(lop);
+    }
+    function LoadSentMsgUserList() {
+        document.getElementById('sentmsgUser').innerHTML = 'wait';
+
+        Loadpartialview('GET', '/Consultant/SentMsgUserList', [], 'sentmsgUser', 'modal-defaul', 'loadingModal')
+    }
+
+    function divScrollDown() {
+        var objDiv = document.getElementById("messagesListCunsul");
+        objDiv.scrollTop = objDiv.scrollHeight;
+    }
+    //function downn(id) {
+    //     var elmnt = document.getElementById(id);
+    //elmnt.scrollIntoView();
+    //}
+</script>

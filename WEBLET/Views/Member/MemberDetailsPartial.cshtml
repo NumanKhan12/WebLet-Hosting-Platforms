@@ -1,0 +1,68 @@
+﻿@model WEBLET.ViewModels.BOOKING_VIEW_MODEL
+@using WEBLET.BusinessLogics;
+@using WEBLET.ViewModels;
+@{
+  
+    //  MEMBER_NOM_VIEW_MODEL mem = MemberNomineeProcessor.GetMember_Nominee(Model.MEMBER_ID, Model.BOK_ID);
+}
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<div class="col col-sm-9">
+    <div class="row">
+        <div class="col-sm-9">
+            <label><b>Name</b></label>
+            <div class="float-right" style="border-bottom: 1px solid black !important;  width:70%;">
+                @Model.MEMBER_NAME
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <label><b>CNIC</b></label>
+            <div class="float-right" style="border-bottom: 1px solid black !important;  width:70%;">
+                @Model.MEMBER_CNIC
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <label><b>Address:</b></label>
+            <div class="float-right" style="border-bottom: 1px solid black !important;  width:70%;">
+                @Model.MEMBER_ADDRESS
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <label><b>Nominee</b></label>
+            @{ @*if (mem == null)
+                {
+                <div class="float-right badge badge-danger" style="border-bottom: 1px solid black !important;  width:70%;">
+                    to be Added later
+                </div>
+                }
+                else
+                {
+                <div class="float-right" style="border-bottom: 1px solid black !important;  width:70%;">
+                    @mem.NOMINEENAME
+                </div>
+
+                    }*@ }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-sm-3">
+
+
+        </div>
+    </div>
+</div>
+<div class="col col-sm-3">
+    <div class="Image1">
+        @if (Model.MEMBER_PIC != null)
+        {
+            <img src="~/images/@Model.MEMBER_PIC" style="width:100%; margin-bottom: 10px;" />
+
+        }
+        else
+        {
+            <img id="MEMBER_PIC" src="~/images/NOIMAGEICON.png" style="width:100%;margin-bottom: 10px;" />
+
+        }
+    </div>
+</div>

@@ -1,0 +1,291 @@
+﻿
+
+<head>
+    <style>
+        .header_color {
+            background-color: #BF9D40;
+            color: white;
+            font-weight: 900;
+        }
+    </style>
+    <script src="~/js/jquery/jquery-3.2.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="~/js/API/ApiCalls.js"></script>
+    <script src="~/js/API/Alerts.js"></script>
+
+</head>
+@using WEBLET.ViewModels;
+@using WEBLET.BusinessLogics;
+ 
+@using WEBLET.Models;
+@{
+    List<AspNetRole> roleList = Role.NetRoleList();
+
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+
+
+        <div class="row card card-outline-warning ">
+            <div class="card-header card-title header_color text-white">Create  Consultant Account</div>
+
+            <div class="col-12 grid-margin stretch-card">
+
+                <div class="card-body">
+                    <div>
+                        <form class="forms-sample" id="dform">
+                            <input id="ACC_ID" hidden />
+                            <div class=" form-group col-sm-6">
+                                <label><b>Enter Your Name</b></label>
+
+                                <input type="text" class="form-control heighttext " id="Name" placeholder="Enter Your Name">
+
+
+
+                            </div>
+
+
+                            <div class="form-group col-sm-6">
+                                <label><b>Enter Your Email</b></label>
+
+                                <input type="email" class="form-control heighttext" id="Role_Email" placeholder="Enter Your Email">
+                            </div>
+
+
+
+                            <div class="form-group col-sm-6">
+                                <label><b>Date Of Barth</b></label>
+                                <input type="date" class="form-control heighttext" id="Role_DOB">
+                            </div>
+                            <div class="row">
+                                <div class="form-group ml-2 col-2">
+                                    <label><b>Select Countrie Code</b></label>
+                                    @Html.Partial("CountriesCode")
+                                </div>
+                                <div class="form-group col-4">
+                                    <label><b>Enter Phone number</b></label>
+
+                                    <input type="text" class="form-control heighttext" id="Phon_number" placeholder="Phone" onkeydown="phonefunc(this, event)" onkeypress="return isnumer2(event,this)">
+                                </div>
+                            </div>
+
+
+                            <!--<div class="form-group col-sm-6">
+        <label><b>Select  Role</b></label>
+
+        <select class="form-control heighttext" id="Role">
+            <option value="0" disabled selected>Select Status</option>
+            <option value="COINVESTOR">COINVESTOR</option>
+            <option value="MARKETER">MARKETER</option>
+            <option value="CONSULTANT">CONSULTANT</option>-->
+                            @*@foreach (var item in roleList)
+             {
+                  <option value="@item.Name">@item.Name</option>
+        }*@
+                            <!--</select>
+
+    </div>-->
+                            @*<div class="form-group col-sm-6">
+                                <label><b>Enter Your CNIC</b></label>
+                                <input class="form-control heighttext" id="cnic" placeholder="CNIC" onkeydown="CNICChnagefunction(this, event)" onkeypress="return isnumber(event,this)">
+
+
+                            </div>*@
+                            <div class="form-group col-sm-6">
+                                <label><b>Enter Your Password</b></label>
+                                <input class="form-control heighttext" type="password" id="Password" placeholder="Enter your  Password" />
+
+
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label><b>Enter Your confrem Password</b></label>
+                                <input class="form-control heighttext" type="password" id="cPassword" placeholder="confrem Password" />
+
+
+                            </div>
+                            @*<div class="form-group ml-4 col-sm-6">
+                                <div class="form-check ">
+                                    <input type="checkbox" class="form-check-input" id="payment" value="Yes">
+                                    <label class="form-check-label" for="payment12">Can Approve Payment</label>
+                                </div>
+                            </div>*@
+                            <div class="form-group col-sm-6">
+                                <button class="btn btn-sm btn-success" type="button" onclick="Create(this)"> Create </button>
+
+                            </div>
+
+
+
+
+
+
+
+                        </form>
+
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- content-wrapper ends -->
+    <!-- partial:../../partials/_footer.html -->
+    @Html.Partial("footer")
+    <!-- partial -->
+</div>
+
+
+
+
+
+<script>
+
+    function CNICChnagefunction(input, evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if ((input.value.length == 5 || input.value.length == 13) && charCode !== 8) {
+            input.value = input.value + '-';
+        }
+    }
+
+    function isnumber(evt, input) {
+        //evt = (evt) ? evt : window.event;
+        //var charCode = (evt.which) ? evt.which : evt.keyCode;
+        //if (charCode > 31 && (charCode < 48 || charCode > 57) || input.value.length > 14) {
+        //    return false;
+        //}
+        return true;
+    }
+
+    function isnumer2(evt, input) {
+        //evt = (evt) ? evt : window.event;
+        //var charCode = (evt.which) ? evt.which : evt.keyCode;
+        //if (charCode > 31 && (charCode < 48 || charCode > 57) || input.value.length > 11) {
+        //    return false;
+        //}
+        return true;
+    }
+    function phonefunc(input, evt) {
+        //evt = (evt) ? evt : window.event;
+        //var charCode = (evt.which) ? evt.which : evt.keyCode;
+        //console.log(input.value);
+        //if ((input.value.length == 4) && charCode !== 8) {
+        //    input.value = input.value + '-';
+        //}
+    }
+
+    function Create(btn) {
+        //btn.disabled = true;
+        //btn.innerHTML = '<img  src="/images/2.gif" width="20" height="20"/>';
+        var Name = $('#Name').val();
+        var Email = $('#Role_Email').val();
+        var DOB = $('#Role_DOB').val();
+        var Phone = $('#Phon_number').val();
+        var Role = $('#Role').val();
+
+        //var CNIC = $('#cnic').val();
+        var Password = $('#Password').val();
+        var cPassword = $('#cPassword').val();
+        //var payment_Aprove = $('#payment').is(":checked");
+        //console.log(payment_Aprove);
+        if (Name == '') {
+            Alert('error', 'Enter your Name')
+            document.getElementById('Name').focus();
+        }
+        else if (Email == '') {
+            Alert('error', 'Enter your Email');
+            document.getElementById('Role_Email').focus();
+            return;
+        }
+        else if (!ValidateEmail(Email)) { Alert('Error', 'Invalid your Email') }
+        else if (DOB == '') {
+            Alert('error', 'Enter your Date of Barth');
+            document.getElementById('Role_DOB').focus();
+        }
+        else if (Phone == '') {
+            Alert('error', 'Enter your Phone Number');
+            document.getElementById('Phon_number').focus();
+        }
+        //else if (!ValidationPhone(Phone)) {
+        //    Alert('error', 'Enter Valid Phone Number');
+        //    document.getElementById('Phon_number').focus();
+        //}
+        //else if (Role == null) {
+        //    Alert('error', 'select your Role');
+        //    document.getElementById('Role').focus();
+        //}
+        //else if (CNIC == '') {
+        //    Alert('error', 'Enter your CNIC');
+        //    document.getElementById('cnic').focus();
+        //}
+        //else if (!ValidationCNIC(CNIC)) {
+        //    Alert('error', 'Enter valid CNIC');
+        //    document.getElementById('cnic').focus();
+        //}
+        else if (Password == '') {
+            Alert('error', 'Enter your Password');
+            document.getElementById('Password').focus();
+        }
+        else if (cPassword == '') {
+            Alert('error', 'Enter your Confrem Password');
+            document.getElementById('cPassword').focus();
+        }
+        else if (cPassword != Password) { Alert('error', 'Password and Confirm Password must be same') }
+        else {
+            data = {
+                FULL_NAME: Name,
+                EMAIL: Email,
+                DOB: DOB,
+                PHONE: Phone,
+                ROLE: 'CONSULTANT',
+                CNIC: '34902-3234343-9',
+                //CNIC: CNIC,
+                PASSWORD: Password,
+                //Payment_Approve: 1
+
+            }
+            //Create Successfully 
+            var apicall = ['Post', '/Account/RoleRegister', btn, data, "Pleace confirm Your Email", 'dform', true];
+            ConfirmationAlert("Do you want to create the Account? ", "Yes", "No", AjaxButtonCall, apicall);
+
+        }
+
+
+    }
+
+
+    //function ValidationPhone(phon) {
+
+    //    if (phon.length == 12) {
+    //        return true;
+    //    }
+    //    else {
+    //        return false;
+    //    }
+    //}
+    //function ValidationCNIC(cnic) {
+
+    //    if (cnic.length == 15) {
+    //        return true;
+    //    }
+    //    else {
+    //        return false;
+    //    }
+    //}
+    function MoveToPag() {
+        document.getElementById('dform').reset();
+    }
+    function ValidateEmail(inputText) {
+        var regex = /^([a-zA-Z0-9_\.\-\+])+\@@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        if (!regex.test(inputText)) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+</script>

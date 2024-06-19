@@ -1,0 +1,63 @@
+﻿@model WEBLET.ViewModels.PanelDetailImagesViewModel
+
+<div class="col-sm-3">
+    <div class="Image1">
+        @if (Model.HOST1 != null)
+        {
+            <img src="~/images/@Model.HOST1" width="160" height="160" style="margin-bottom: 10px;" id="USER_PIC_HOST1" />
+        }
+        else
+        {
+            <img src="~/images/dummy-user.jpg" width="160" height="160" style="margin-bottom: 10px;" id="USER_PIC_HOST1" />
+
+        }
+
+
+        <div class="MyOverlay" onclick="document.getElementById('HOST1').click()">
+            <a href="#" class="MyIcon" title="User Profile">
+                <i class="fa fa-camera"></i>
+            </a>
+        </div>
+        <input style="width:100px !important" type="file" class="" accept="image/jpeg,image/gif,image/png" id="HOST1" hidden onchange="readURL(this,'USER_PIC_HOST1')">
+    </div>
+</div>
+<div class="col-sm-3 ">
+    <div class="Image1">
+        @if (Model.HOST2 != null)
+        {
+            <img src="~/images/@Model.HOST2" width="160" height="160" style="margin-bottom: 10px;" id="USER_PIC_HOST2" />
+        }
+        else
+        {
+             <img src="~/images/dummy-user.jpg" width="160" height="160" style="margin-bottom: 10px;" id="USER_PIC_HOST2" />
+        }
+
+
+        <div class="MyOverlay" onclick="document.getElementById('HOST2').click()">
+            <a href="#" class="MyIcon" title="User Profile">
+                <i class="fa fa-camera"></i>
+            </a>
+        </div>
+        <input style="width:100px !important" type="file" class="" accept="image/jpeg,image/gif,image/png" id="HOST2" hidden onchange="readURL(this,'USER_PIC_HOST2')">
+    </div>
+</div>
+<div class="col-sm-3 ">
+    <div class="Image1">
+        @if (Model.HOST3 != null)
+        {
+            <img src="~/images/@Model.HOST3" width="160" height="160" style="margin-bottom: 10px;" id="USER_PIC_HOST3" />
+        }
+        else
+        {
+            <img src="~/images/dummy-user.jpg" width="160" height="160" style="margin-bottom: 10px;" id="USER_PIC_HOST3" />
+        }
+
+
+        <div class="MyOverlay" onclick="document.getElementById('HOST3').click()">
+            <a href="#" class="MyIcon" title="User Profile">
+                <i class="fa fa-camera"></i>
+            </a>
+        </div>
+        <input style="width:100px !important" type="file" class="" accept="image/jpeg,image/gif,image/png" id="HOST3" hidden onchange="readURL(this,'USER_PIC_HOST3')">
+    </div>
+</div>

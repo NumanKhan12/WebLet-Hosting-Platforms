@@ -1,0 +1,307 @@
+﻿
+@{
+    ViewData["Title"] = "MemberRegistrationView";
+}
+
+
+@{
+    ViewData["Title"] = "CompeleteRegistration";
+}
+@using WEBLET.ViewModels;
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ApplicationUser user = await UserManager.GetUserAsync(User);
+}
+@using WEBLET.Data;
+@using WEBLET.Models;
+<head>
+    <style>
+        .header_color {
+            background-color: #BF9D40;
+            color: white;
+            font-weight: 900;
+        }
+
+        .badge-blue {
+            background-color: steelblue;
+        }
+
+        .child {
+            background-color: #f0d27f
+        }
+    </style>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <script>
+        function CNICChnagefunction(input, evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if ((input.value.length == 5 || input.value.length == 13) && charCode !== 8) {
+                input.value = input.value + '-';
+            }
+        }
+        function isnumber(evt, input) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57) || input.value.length > 14) {
+                return false;
+            }
+            return true;
+        }
+
+        function isnumer2(evt, input) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57) || input.value.length > 11) {
+                return false;
+            }
+            return true;
+        }
+        function phonefunc(input, evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            console.log(input.value);
+            if ((input.value.length == 4) && charCode !== 8) {
+                input.value = input.value + '-';
+            }
+        }
+    </script>
+
+</head>
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row card card-outline-warning ">
+            <div class="card-header card-title header_color text-white">Member Registration<button class="float-right child" id="basic-addon2" data-target="#modal-default" data-toggle="modal" onclick="LoadMembers(this)"><i class="fa fa-search"></i></button></div>
+            @Html.Partial("LoadingModal")
+            @{
+                string[] array = { "Member ID", "Member Name", "Member CNIC", "Member City", "Member Country" };
+            }
+            @Html.Partial("SearchModalLarge", new ModalViewMoal { Name = "Member", tableId = "Purchases", Columns = array, ModelSize = "60%" })
+            <div class="col-12 grid-margin stretch-card">
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 grid-margin stretch-card">
+                            <div class="card card-outline-warning">
+                                <div class="card-header child card-title ">User Information</div>
+                                <div class="card-body">
+                                    <form class="forms-sample" id="AForm">
+                                        <div class="form-group">
+                                            <label><b>Name</b></label>
+                                            <input type="text" class="form-control  heighttext" id="MEMBER_NAME" placeholder="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label><b>Mobile Number</b></label><br />
+                                            <input type="text" class="form-control  heighttext" id="M_NUMBER" placeholder="" onkeydown="phonefunc(this, event)" onkeypress="return isnumer2(event,this)">
+                                        </div>
+                                        <div class="form-group">
+                                            <label><b>Email</b></label><br />
+                                            <input type="text" class="form-control  heighttext" id="EMAIL" placeholder="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label><b>Password</b></label><br />
+                                            <input type="password" class="form-control  heighttext" id="PASSWORD" placeholder="">
+                                        </div>
+                                        <div class="">
+                                            <input style="width:100px !important" type="file" class="" accept="image/jpeg,image/gif,image/png" id="MEMBERPIC">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8 grid-margin stretch-card">
+                            <div class="card card-outline-warning">
+                                <div class="card-header child card-title ">Personal Information</div>
+                                <div class="card-body">
+
+                                    <form class="forms-sample" id="BForm">
+                                        <div class="row ">
+                                            <div class="col-sm-5">
+                                                <div class="form-group ">
+                                                    <label><b>Title</b></label>
+                                                    <select class="form-control  heighttext" id="MEMBER_TITLE">
+                                                        <option value="">Select Title</option>
+                                                        <option value="S/O">S/O</option>
+                                                        <option value="F/O">F/O</option>
+                                                        <option value="D/O">D/O</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <div class="form-group">
+                                                    <label><b>Father/Spouse Name</b></label>
+                                                    <input type="text" class="form-control heighttext" id="MEMBER_FATHER_NAME" placeholder="Father Name">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                <div class="form-group">
+                                                    <label><b>Date of Birth</b></label>
+                                                    <input type="date" class="form-control  heighttext" id="MEMBER_DOB" placeholder="Date of Birth">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <div class="form-group">
+                                                    <label><b>CNIC</b></label>
+                                                    <input type="text" class="form-control heighttext" id="MEMBER_CNIC" onkeydown="CNICChnagefunction(this, event)" onkeypress="return isnumber(event,this)">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label><b>Address</b></label>
+                                            <input type="email" class="form-control heighttext" id="MEMBER_ADDRESS" placeholder="Complete Address Line">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                <div class="form-group">
+                                                    <label><b>Country</b></label>
+                                                    @Html.Partial("CountriesCode")
+                                                    @*<input class="form-control heighttext" id="MEMBER_COUNTRY" placeholder="Country" />*@
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <div class="form-group">
+                                                    <label><b>City</b></label>
+                                                    <input class="form-control heighttext" id="MEMBER_CITY" placeholder="City">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button class="child btn " onclick="SaveVendor(this)"  id="sb" type="button">Submit</button>
+
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- content-wrapper ends -->
+    <!-- partial:../../partials/_footer.html -->
+    @Html.Partial("footer")
+    <!-- partial -->
+</div>
+<form id="Cform"></form>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="~/js/API/Alerts.js"></script>
+<script src="~/js/API/ApiCalls.js"></script>
+<script>
+
+
+
+    function LoadMembers(btn) {
+        LoadDataBeforeModal('GET', 'LoadMembers', 'example1', 'ptable', 'modal-default', btn, 'loadingModal')
+
+    }
+
+
+
+
+    function RefereshForm() {
+        document.getElementById('AForm').reset();
+        document.getElementById('BForm').reset();
+    }
+    function SaveVendor(btn) {
+        var MEMBER_NAME = document.getElementById("MEMBER_NAME").value;
+        var M_NUMBER = document.getElementById("M_NUMBER").value;
+        var EMAIL = document.getElementById("EMAIL").value;
+        var PASSWORD = document.getElementById("PASSWORD").value;
+        var MEMBER_TITLE = document.getElementById("MEMBER_TITLE").value;
+        var MEMBER_FATHER_NAME = document.getElementById("MEMBER_FATHER_NAME").value;
+        var MEMBER_DOB = document.getElementById("MEMBER_DOB").value;
+        var MEMBER_CNIC = document.getElementById("MEMBER_CNIC").value;
+        var MEMBER_ADDRESS = document.getElementById("MEMBER_ADDRESS").value;
+        var MEMBER_COUNTRY = document.getElementById("MEMBER_COUNTRY").value;
+        var MEMBER_CITY = document.getElementById("MEMBER_CITY").value;
+        if (MEMBER_NAME == '') {
+            Alert('error', 'Enter Member Name');
+            document.getElementById('MEMBER_NAME').focus();
+        }
+        else if (M_NUMBER == '') {
+            Alert('error', 'Enter Phone Number');
+            document.getElementById('M_NUMBER').focus();
+        } else if (PASSWORD == '') {
+            Alert('error', 'Enter Password');
+            document.getElementById('PASSWORD').focus();
+        }
+        else if (EMAIL == '') {
+            Alert('error', 'Enter Email');
+            document.getElementById('EMAIL').focus();
+        }
+        else if (MEMBER_FATHER_NAME == '') {
+            Alert('error', 'Enter Father Name');
+            document.getElementById('MEMBER_FATHER_NAME').focus();
+        } else if (MEMBER_DOB == '') {
+            Alert('error', 'Enter Member Date of Birth');
+            document.getElementById('MEMBER_DOB').focus();
+        } else if (MEMBER_CNIC == '') {
+            Alert('error', 'Enter Member CNIC');
+            document.getElementById('MEMBER_CNIC').focus();
+        }
+        else if (MEMBER_ADDRESS == '') {
+            Alert('error', 'Enter Address');
+            document.getElementById('MEMBER_ADDRESS').focus();
+        } else if (MEMBER_COUNTRY == '') {
+            Alert('error', 'Enter Country');
+            document.getElementById('MEMBER_COUNTRY').focus();
+        } else if (MEMBER_CITY == '') {
+            Alert('error', 'Enter City');
+            document.getElementById('MEMBER_CITY').focus();
+        }
+        console.log(ValidateEmail(EMAIL));
+        if (ValidateEmail(EMAIL)) {
+            $('#EMAIL').text('');
+            $("#EMAIL").css("border", "1px solid #e8ecf1");
+        }
+        else {
+            Alert('error', 'Please Enter Valid Email')
+            $("#EMAIL").css("border", "1px solid red");
+
+            return;
+        }    {
+            data = {
+                "MEMBER_NAME": MEMBER_NAME,
+                "M_NUMBER": M_NUMBER,
+                "EMAIL": EMAIL,
+                "PASSWORD": PASSWORD,
+                "MEMBER_TITLE": MEMBER_TITLE,
+                "MEMBER_FATHER_NAME": MEMBER_FATHER_NAME,
+                "MEMBER_DOB": MEMBER_DOB,
+                "MEMBER_CNIC": MEMBER_CNIC,
+                "MEMBER_ADDRESS": MEMBER_ADDRESS,
+                "MEMBER_COUNTRY": MEMBER_COUNTRY,
+                "MEMBER_CITY": MEMBER_CITY,
+            }
+        
+           
+            var file_data = $("#MEMBERPIC").prop("files")[0];
+            var form_data = new FormData();
+            form_data.append("data", JSON.stringify(data));
+            form_data.append("file", file_data);
+
+        
+            var apicall = ['POST', 'CreateMember', btn, form_data, "Saved Successfully", 'Cform', true];
+            ConfirmationAlert("Do you want to Save the record? ", "Yes", "No", AjaxButtonCallForImage   , apicall);
+        }
+
+
+
+        function ValidateEmail(inputText) {
+            var regex = /^([a-zA-Z0-9_\.\-\+])+\@@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            if (!regex.test(inputText)) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+    }
+</script>

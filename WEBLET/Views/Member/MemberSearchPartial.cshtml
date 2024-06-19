@@ -1,0 +1,21 @@
+﻿@model int
+<div class="col col-sm-9">
+    <div class="row">
+        <div class="input-group mb-2" id="MEMBER">
+            <input class="form-control  form-control-sm heighttext" value="" id="TEXT_MEMBER" placeholder="Member Cnic " onkeydown="CNICChnagefunction(this, event)" onkeypress="return isnumber(event,this)" />
+            <div class="input-group-append">
+                <span class="input-group-text text-small heighttext header_color" id="basic-addon2" data-target="#modal-default" data-toggle="modal" onclick="AddMember('@Model')"><i class="fas fa-search "></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-sm-3">
+
+
+        </div>
+    </div>
+</div>
+<pn class="text-danger">Not Found!</pn>
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@

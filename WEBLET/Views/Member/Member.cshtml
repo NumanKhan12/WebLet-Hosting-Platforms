@@ -1,0 +1,33 @@
+﻿@model IEnumerable<WEBLET.Models.Member>
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<table id="example1" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Member ID</th>
+            <th>Member Name</th>
+            <th>Member CNIC</th>
+            <th>Member City</th>
+            <th>Member Country</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var member in Model)
+        {
+
+            <tr class="" onclick="SetBlocks('@member.MEMBER_ID','@member.MEMBER_NAME','@member.MEMBER_CNIC','@member.MEMBER_CITY','@member.MEMBER_COUNTRY')" data-dismiss="modal">
+                <td>@member.MEMBER_ID</td>
+                <td>@member.MEMBER_NAME</td>
+
+                <td>@member.MEMBER_CNIC</td>
+                <td>@member.MEMBER_CITY</td>
+                <td>@member.MEMBER_COUNTRY</td>
+
+            </tr>
+        }
+    </tbody>
+
+</table>

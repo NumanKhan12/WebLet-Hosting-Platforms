@@ -1,0 +1,57 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    string userId = UserManager.GetUserId(User);
+    ApplicationUser user = await UserManager.GetUserAsync(User);
+}
+@using WEBLET.Data;
+@using WEBLET.Models;
+@using WEBLET.BusinessLogics;
+@using Microsoft.AspNetCore.Http;
+
+
+<li class="nav-item nav-profile">
+    <a href="#" class="nav-link">
+        <div class="profile-image">
+            <img class="img-xs rounded-circle" src="~/AdminTheme/images/faces/face8.jpg" alt="profile image">
+            <div class="dot-indicator bg-success"></div>
+        </div>
+        <div class="text-wrapper">
+            <p class="profile-name text-dark">@user.Name</p>
+            <p class="designation text-dark">Vendor</p>
+        </div>
+        <div class="icon-container">
+            @*<i class="icon-bubbles"></i>*@
+            @*<div class="dot-indicator bg-danger"></div>*@
+        </div>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link text-dark" onclick=" window.location.href='/Booking/VendorBookings'">
+        <span class="menu-title">DashBoard</span>
+        <i class="icon-screen-desktop menu-icon"></i>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link text-dark" href="/Member/MemberRegistrationView">
+        <span class="menu-title">Add Member</span>
+        <i class=" icon-directions menu-icon"></i>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link text-dark">
+        <span class="menu-title">Ploat Inventory</span>
+        <i class=" icon-calculator menu-icon"></i>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link text-dark" href="/CustomerPayment/CustomerPaymentView">
+        <span class="menu-title">Customer Payment</span>
+        <i class=" icon-calculator menu-icon"></i>
+    </a>
+</li>

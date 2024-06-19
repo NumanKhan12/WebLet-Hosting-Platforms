@@ -1,0 +1,46 @@
+﻿@model IEnumerable<WEBLET.Models.AspNetMesg>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@using WEBLET.BusinessLogics
+@{
+    string userId = UserManager.GetUserId(User);
+    ApplicationUser user = await UserManager.GetUserAsync(User);
+    
+    string idd = null;
+}
+
+
+
+<ul class="chats" id="messagesListCunsul">
+    @foreach (var msg in Model)
+    {
+         idd = msg.MSG_ID.ToString();
+        ApplicationUser info = UserProcessor.GetApplicationUserById(msg.FROM_USER);
+        @if (msg.FROM_USER == userId)
+        {
+
+            <li class="my-chat">
+                @msg.MSG<p style="line-height:0px; text-align:right;color:#234E70" onload="this.scrollIntoView()" id=@idd>
+                    @msg.MSG_DATETIME.ToString("dd/MM/yyyy h:mm tt")
+                </p>
+            </li>
+
+        }
+        else
+        {
+            <li class="client-chat">
+                <p style="line-height:0px;color:#FBF8BE">
+
+                    @info.Name    <span class="ml-4"></span>
+                </p>@msg.MSG
+                <p style="line-height:0px; text-align:right;color:#FBF8BE" id=@idd>
+                    @msg.MSG_DATETIME.ToString("dd/MM/yyyy h:mm tt")
+            </li>
+        }
+
+    }
+   
+</ul>
+
+<input id="soddown" value="@idd" hidden />
